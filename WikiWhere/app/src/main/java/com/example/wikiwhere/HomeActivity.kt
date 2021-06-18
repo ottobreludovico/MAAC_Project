@@ -52,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
     private var isConnected = false
     private var preferenceManager: SharedPreferences? = null
 
-    private val homeFragment: HomeFragment? = null
+    private var homeFragment: HomeFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,14 +123,27 @@ class HomeActivity : AppCompatActivity() {
                     if (item.itemId == navigationSelectedItem) {
                         bottomNavigationSelectedItem = -1
                         dl.closeDrawers()
+                        true
+                    }else{
+                        navigationSelectedItem = R.id.nav_home
+                        bottomNavigationSelectedItem = -1
+                        loadFragment(HomeFragment())
+                        dl.closeDrawers()
+                        true
                     }
-                    navigationSelectedItem = R.id.nav_home
-                    bottomNavigationSelectedItem = -1
-                    HomeFragment()
-                    dl.closeDrawers()
-                    true
                 }
                 R.id.nav_profile -> {
+                    if (item.itemId == navigationSelectedItem) {
+                        bottomNavigationSelectedItem = -1
+                        dl.closeDrawers()
+                        true
+                    }else{
+                        navigationSelectedItem = R.id.nav_profile
+                        bottomNavigationSelectedItem = -1
+                        loadFragment(InfoProfileFragment())
+                        dl.closeDrawers()
+                        true
+                    }
 
                 }
                 R.id.nav_settings -> {
@@ -166,6 +179,16 @@ class HomeActivity : AppCompatActivity() {
         })
 
 
+        //loading the default fragment
+        bottomNavigationSelectedItem = -1
+        navigationSelectedItem = R.id.nav_home
+        loadFragment(HomeFragment())
+    }
+
+    private fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.commit()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {

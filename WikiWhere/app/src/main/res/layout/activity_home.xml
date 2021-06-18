@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/material_on_primary_emphasis_medium"
+            android:background="@color/design_default_color_background"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
 

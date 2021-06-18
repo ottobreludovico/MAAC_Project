@@ -24,4 +24,5 @@
     <style name="Theme.WikiWhere.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WikiWhere.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

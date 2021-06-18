@@ -11,10 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WikiWhere">
-        <activity
-            android:name=".HomeFragment"
-            android:label="@string/title_activity_home_fragment"
-            android:theme="@style/Theme.WikiWhere.NoActionBar"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".SigninActivity" />
