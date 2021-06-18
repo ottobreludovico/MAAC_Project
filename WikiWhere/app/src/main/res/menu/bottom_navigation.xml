@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_house"
+        android:icon="@drawable/ic_map"
+        android:title="Esplora" />
+    <item
+        android:id="@+id/navigation_room"
+        android:icon="@drawable/ic_destination"
+        android:title="I tuoi itinerari" />
+    <item
+        android:id="@+id/navigation_wall"
+        android:icon="@drawable/ic_love"
+        android:title="Salvati" />
+</menu>

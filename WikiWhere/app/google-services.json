@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "536900667970",
+    "project_id": "wikiwhere-e985b",
+    "storage_bucket": "wikiwhere-e985b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536900667970:android:97b0cd37fcaeb08a6f7bdb",
+        "android_client_info": {
+          "package_name": "com.example.wikiwhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536900667970-5847uiee7dph4jm3s9hjljg4g1lqhep4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wikiwhere",
+            "certificate_hash": "eedc79fda7e7d9273282620af302f2f1a7508317"
+          }
+        },
+        {
+          "client_id": "536900667970-ba4ok24qdhtlttrhi48pi95mc2vbnatd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc-5WXDKKZhmwDkkQTBTc6Knsl9-k70OM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536900667970-ba4ok24qdhtlttrhi48pi95mc2vbnatd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
