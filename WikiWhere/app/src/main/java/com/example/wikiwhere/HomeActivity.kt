@@ -81,13 +81,13 @@ class HomeActivity : AppCompatActivity() {
         t = object : ActionBarDrawerToggle(this, activity_home, toolbar, R.string.Open, R.string.Close) {
             override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
-                toolbar_title.setText("Menu")
+                toolbar_title.setText("Wikiwhere")
                 invalidateOptionsMenu()
             }
 
             override fun onDrawerClosed(view: View) {
                 super.onDrawerClosed(view)
-                toolbar_title.setText("MobileApp")
+                toolbar_title.setText("WikiWhere")
                 invalidateOptionsMenu()
             }
         }

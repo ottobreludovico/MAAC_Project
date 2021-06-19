@@ -2,6 +2,7 @@
     <string name="app_name">WikiWhere</string>
     <string name="facebook_app_id">454600089161728</string>
     <string name="fb_login_protocol_scheme">fb454600089161728</string>
+    <string name="MAPS_API_KEY">AIzaSyBc-5WXDKKZhmwDkkQTBTc6Knsl9-k70OM</string>
 
     <string name="email">Email</string>
     <string name="confirm_email">Confirm Email</string>
