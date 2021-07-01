@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="374dp"
-        android:layout_height="151dp"
+    <com.example.wikiwhere.IndicatorProgressBar
+        android:id="@+id/indicatorProgressBarId"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:foregroundGravity="center"
+        app:barColor="@color/gray"
+        app:barHeight="12"
+        app:indicatorColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:progress="0"
+        app:progressColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/yesteryear"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="WikiWhere"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/indicatorProgressBarId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

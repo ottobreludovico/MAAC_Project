@@ -4,31 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".InfoPlaceFragment">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="406dp"
-        android:layout_height="442dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeTitle" />
+    <com.example.wikiwhere.CustomScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"
+        android:isScrollContainer="false"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideOverlay">
 
-    <TextView
-        android:id="@+id/placeTitle"
-        android:layout_width="387dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-black"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/placeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="start"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/placeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="TextView" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="369dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="336dp"
+                android:layout_height="41dp"
+                android:text="Save this place"
+                app:backgroundTint="@color/colorPrimaryDark" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="337dp"
+                android:layout_height="41dp"
+                android:text="Add to my itinerary"
+                app:backgroundTint="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+    </com.example.wikiwhere.CustomScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

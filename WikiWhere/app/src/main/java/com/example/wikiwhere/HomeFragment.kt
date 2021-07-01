@@ -1,22 +1,23 @@
 package com.example.wikiwhere
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import okhttp3.*
 import org.json.JSONObject
@@ -29,6 +30,12 @@ import java.util.concurrent.CountDownLatch
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var images: ArrayList<String> = arrayListOf()
+private var lats: ArrayList<Double> = arrayListOf()
+private var longs: ArrayList<Double> = arrayListOf()
+private var listItems: ArrayList<String> = arrayListOf()
+private var listRatings: ArrayList<Float> = arrayListOf()
+private var listVicinity: ArrayList<String> = arrayListOf()
 
 /**
  * A simple [Fragment] subclass.
@@ -42,16 +49,11 @@ class HomeFragment : Fragment() {
     private lateinit var listView : ListView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var searchText : String
-    private var filterText = ""
+    private var filterText = "&type=bar"
     private var l1 : Double = 41.54
     private var l2 : Double = 12.48
     private var condizione : Int = 0
-
-    var images: ArrayList<String> = arrayListOf()
-    var lats: ArrayList<Double> = arrayListOf()
-    var longs: ArrayList<Double> = arrayListOf()
-    var listItems: ArrayList<String> = arrayListOf()
-    var listRatings: ArrayList<Float> = arrayListOf()
+    private var condizione2 : Int = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +65,25 @@ class HomeFragment : Fragment() {
     }
 
 
+    fun getLocationFromAddress(context: Context?, ress: String): LatLng? {
+        val coder = Geocoder(context)
+        var p1: LatLng? = null
+        try {
+            // May throw an IOException
+            val address = coder.getFromLocationName(ress, 5)
+            if (address == null) {
+                return null
+            }
+            val location = address[0]
+            p1 = LatLng(location.latitude, location.longitude)
+            return p1
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return null
+        }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,13 +91,10 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val viewR = inflater.inflate(R.layout.fragment_home, container, false)
-        condizione=0
+
         //get the spinner from the xml.
        viewR.imageButton.setOnClickListener {
-            val geocoder = Geocoder(viewR.context)
-            searchText = viewR.searchT.text.toString()
-            println(searchText)
-            val list = geocoder.getFromLocationName(searchText, 1)
+            /*val list = geocoder.getFromLocationName(searchText, 1)
             if(list.size > 0) {
                 l1 = list.get(0).getLatitude();
                 println(l1)
@@ -95,13 +113,83 @@ class HomeFragment : Fragment() {
                 val lAdapter = CustomListAdapter(viewR.context, listItems, images, listRatings, lats, longs)
 
                 viewR.placeList.adapter = lAdapter
+            }*/
+
+               searchText=viewR.searchT.text.toString()
+               val c = getLocationFromAddress(context,searchText)
+               if(c!=null){
+                   val countDownLatch = CountDownLatch(1)
+                   l1=c!!.latitude
+                   l2=c!!.longitude
+                   call(l1,l2,countDownLatch)
+                   countDownLatch.await();
+                   val lAdapter = CustomListAdapter(0,viewR.context, listItems, images, listRatings, lats, longs, listVicinity)
+
+                   viewR.placeList.adapter = lAdapter
+               }
+
+
+
+
+
+        }
+
+        viewR.imageButton2.setOnClickListener {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(viewR.context)
+
+            if (ActivityCompat.checkSelfPermission(
+                            viewR.context,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            viewR.context,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+
+
             }
+
+            fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
+                if(location!=null){
+                    println("aoooooooo")
+                    l1=location.latitude
+                    l2=location.longitude
+
+                    val countDownLatch = CountDownLatch(1)
+                    call(l1,l2,countDownLatch)
+                    countDownLatch.await();
+                    val lAdapter = CustomListAdapter(0,viewR.context, listItems, images, listRatings, lats, longs, listVicinity)
+
+                    viewR.placeList.adapter = lAdapter
+                }else{
+
+                    val countDownLatch = CountDownLatch(1)
+                    call(l1,l2,countDownLatch)
+                    countDownLatch.await();
+                    val lAdapter = CustomListAdapter(0,viewR.context, listItems, images, listRatings, lats, longs, listVicinity)
+
+                    viewR.placeList.adapter = lAdapter
+                }
+
+            }
+
+
+
 
         }
 
 
+
         //get the spinner from the xml.
-        val dropdown: Spinner = viewR.spinner2
+       /* val dropdown: Spinner = viewR.spinner2
 //create a list of items for the spinner.
 //create a list of items for the spinner.
         val items = arrayOf("accounting",
@@ -225,73 +313,31 @@ class HomeFragment : Fragment() {
         val adapter: ArrayAdapter<String> = ArrayAdapter(viewR.context, android.R.layout.simple_spinner_dropdown_item, items)
 //set the spinners adapter to the previously created one.
 //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter)
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(viewR.context)
-
-        if (ActivityCompat.checkSelfPermission(
-                viewR.context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                viewR.context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-        }
-
-        fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
-            // Got last known location. In some rare situations this can be null.
-            if(location!=null){
-                l1=location.latitude
-                l2=location.longitude
-                println(l1)
-                println(l2)
-                val countDownLatch = CountDownLatch(1)
-                call(l1,l2,countDownLatch)
-                countDownLatch.await();
-                val lAdapter = CustomListAdapter(viewR.context, listItems, images, listRatings, lats, longs)
-
-                viewR.placeList.adapter = lAdapter
-            }else{
-
-                val countDownLatch = CountDownLatch(1)
-                call(l1,l2,countDownLatch)
-                countDownLatch.await();
-                val lAdapter = CustomListAdapter(viewR.context, listItems, images, listRatings, lats, longs)
-
-                viewR.placeList.adapter = lAdapter
-            }
-
-        }
+        dropdown.setAdapter(adapter)*/
 
 
 
-        //val lAdapter = ListAdapter(viewR.context, listItems, listItems, null, R.drawable.ic_launcher_foreground)
-        //val lAdapter = ArrayAdapter<String>(viewR.context, android.R.layout.simple_list_item_1, prova)
+
+        val lAdapter = CustomListAdapter(0, viewR.context, listItems, images, listRatings, lats, longs, listVicinity)
+        viewR.placeList.adapter = lAdapter
         return viewR
     }
 
+
+
     private fun call(lat: Double, lon: Double,c:CountDownLatch){
-        println("daje")
+        images = arrayListOf<String>()
+        lats = arrayListOf<Double>()
+        longs = arrayListOf<Double>()
+        listItems = arrayListOf<String>()
+        listRatings= arrayListOf<Float>()
+        listVicinity= arrayListOf()
         val client = OkHttpClient()
 
         val request = Request.Builder()
                 .url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+lon+"&radius=5000&key=AIzaSyBc-5WXDKKZhmwDkkQTBTc6Knsl9-k70OM"+filterText)
                 .build()
 
-        images = arrayListOf()
-        lats= arrayListOf()
-        longs = arrayListOf()
-        listItems= arrayListOf()
-        listRatings = arrayListOf()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
@@ -307,6 +353,7 @@ class HomeFragment : Fragment() {
                         for (i in 0 until jsonArray.length()){
                             val jsonObject = jsonArray.getJSONObject(i)
                             listItems.add(jsonObject.getString("name"))
+                            listVicinity.add(jsonObject.getString("vicinity"))
                             if(jsonObject.has("rating")){
                                 listRatings.add((jsonObject.getDouble("rating")).toFloat())
                             }else{
@@ -327,7 +374,6 @@ class HomeFragment : Fragment() {
                         c.countDown();
                     }
 
-                    println(listItems)
                     //println(response.body!!.string())
                 }
             }

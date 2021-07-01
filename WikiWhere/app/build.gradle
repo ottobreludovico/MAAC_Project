@@ -9,6 +9,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+
     defaultConfig {
         applicationId "com.example.wikiwhere"
         minSdkVersion 18
@@ -17,6 +18,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -35,8 +37,35 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-vision:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation "com.google.android.gms:play-services-location:15.0.1"
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services:8.4.0'
+
+
+
+    implementation 'com.google.firebase:firebase-auth:20.0.4'
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:27.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    // Also declare the dependency for the Google Play services library and specify its version
+
+
+
+
+    implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.1'
+    implementation 'com.google.android.gms:play-services-vision-common:19.1.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation"com.synnapps:carouselview:0.1.5"
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.android.volley:volley:1.1.1'
+
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "androidx.preference:preference-ktx:1.1.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -47,22 +76,23 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.facebook.android:facebook-login:6.+'
     implementation "com.squareup.okhttp3:okhttp:4.8.1"
-    implementation 'com.google.firebase:firebase-auth:20.0.4'
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:27.0.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    // Declare the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    // Also declare the dependency for the Google Play services library and specify its version
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
 
 
     testImplementation 'junit:junit:4.+'
+
+
+
+
+
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    googleServices.disableVersionCheck = true
 }

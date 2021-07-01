@@ -4,18 +4,22 @@
         <item
             android:id="@+id/nav_home"
             android:iconTint="@android:color/white"
-            android:title="home_navigation" />
-        <item android:id="@+id/nav_profile"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
             android:iconTint="@android:color/white"
-            android:title="profile"/>
-        <item android:id="@+id/nav_settings"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_settings"
             android:iconTint="@android:color/white"
-            android:title="settings"/>
+            android:title="Settings" />
     </group>
-    <item android:id="@+id/nav_info"
+    <item
+        android:id="@+id/nav_info"
         android:iconTint="@android:color/white"
-        android:title="info"/>
-    <item android:id="@+id/nav_logout"
+        android:title="Info" />
+    <item
+        android:id="@+id/nav_logout"
         android:iconTint="@android:color/white"
-        android:title="log_out"/>
+        android:title="Logout" />
 </menu>

@@ -22,7 +22,8 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <FrameLayout
-        android:layout_width="414dp"
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
         android:layout_height="657dp"
         android:layout_marginTop="13dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +33,9 @@
         <ListView
             android:id="@+id/placeList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="20.0sp">
 
         </ListView>
 
@@ -40,36 +43,50 @@
 
     <EditText
         android:id="@+id/searchT"
-        android:layout_width="237dp"
-        android:layout_height="37dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="Via del corso 112"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintHorizontal_weight="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0" />
 
     <ImageButton
         android:id="@+id/imageButton"
         style="@android:style/Widget.DeviceDefault.ImageButton"
-        android:layout_width="39dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:src="@android:drawable/ic_menu_search"
-        android:tint="@color/black"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/search"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_weight="0"
         app:layout_constraintStart_toEndOf="@+id/searchT"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="122dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/pin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

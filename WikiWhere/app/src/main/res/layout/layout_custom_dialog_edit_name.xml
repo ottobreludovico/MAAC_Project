@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="10dp"
+        android:textColorHint="?android:attr/textColorPrimary"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:boxStrokeErrorColor="@android:color/holo_red_dark"
+        app:endIconMode="clear_text"
+        app:hintTextColor="?android:attr/textColorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/setUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName|textCapSentences"
+            android:singleLine="true"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textColorHint="?android:attr/textColorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

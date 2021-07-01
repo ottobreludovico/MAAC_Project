@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_map"
         android:title="Esplora" />
     <item
+        android:id="@+id/photo_menu"
+        android:icon="@drawable/ic_photo"
+        android:title="Take a photo" />
+    <item
         android:id="@+id/navigation_room"
         android:icon="@drawable/ic_destination"
         android:title="I tuoi itinerari" />
